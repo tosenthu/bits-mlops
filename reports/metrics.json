@@ -1,0 +1,55 @@
+{
+  "models": [
+    {
+      "model_name": "logistic_regression",
+      "best_params": {
+        "classifier__C": 1.0
+      },
+      "cv_roc_auc": 0.8932156257737653,
+      "test_metrics": {
+        "accuracy": 0.8688524590163934,
+        "precision": 0.8125,
+        "recall": 0.9285714285714286,
+        "f1": 0.8666666666666667,
+        "roc_auc": 0.9664502164502166
+      },
+      "confusion_matrix": [
+        [
+          27,
+          6
+        ],
+        [
+          2,
+          26
+        ]
+      ]
+    },
+    {
+      "model_name": "random_forest",
+      "best_params": {
+        "classifier__max_depth": null,
+        "classifier__min_samples_leaf": 1,
+        "classifier__n_estimators": 50
+      },
+      "cv_roc_auc": 0.8832519094147001,
+      "test_metrics": {
+        "accuracy": 0.8688524590163934,
+        "precision": 0.8125,
+        "recall": 0.9285714285714286,
+        "f1": 0.8666666666666667,
+        "roc_auc": 0.9426406926406926
+      },
+      "confusion_matrix": [
+        [
+          27,
+          6
+        ],
+        [
+          2,
+          26
+        ]
+      ]
+    }
+  ],
+  "best_model": "logistic_regression"
+}

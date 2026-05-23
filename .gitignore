@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.cache/
+.venv/
+venv/
+*.egg-info/
+
+# Data and generated artifacts
+mlruns/
+*.db
+
+# Keep generated directories but avoid large ad hoc files
+reports/rendered/
+
+# OS/editor
+.DS_Store
+.idea/
+.vscode/
