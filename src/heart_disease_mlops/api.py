@@ -11,8 +11,8 @@ from typing import Any
 
 import joblib
 import pandas as pd
-from fastapi import FastAPI, HTTPException, Request
-from prometheus_client import Counter, Histogram, make_asgi_app
+from fastapi import FastAPI, HTTPException, Request, Response
+from prometheus_client import CONTENT_TYPE_LATEST, Counter, Histogram, generate_latest
 from pydantic import BaseModel, Field
 from sklearn.pipeline import Pipeline
 
@@ -118,6 +118,10 @@ def create_app(model_path: Path = MODEL_PATH) -> FastAPI:
     def health() -> dict[str, str]:
         return {"status": "ok"}
 
+    @app.get("/metrics")
+    def metrics() -> Response:
+        return Response(generate_latest(), media_type=CONTENT_TYPE_LATEST)
+
     @app.post("/predict", response_model=PredictionResponse)
     def predict(payload: PatientFeatures) -> PredictionResponse:
         feature_df = payload.to_dataframe()
@@ -140,7 +144,6 @@ def create_app(model_path: Path = MODEL_PATH) -> FastAPI:
             confidence=round(confidence, 6),
         )
 
-    app.mount("/metrics", make_asgi_app())
     return app
 
 

@@ -32,6 +32,7 @@ def test_predict_endpoint_returns_probability(tmp_path: Path) -> None:
 
     app = create_app(model_path=model_path)
     with TestClient(app) as client:
+        metrics_response = client.get("/metrics")
         response = client.post(
             "/predict",
             json={
@@ -51,6 +52,8 @@ def test_predict_endpoint_returns_probability(tmp_path: Path) -> None:
             },
         )
 
+    assert metrics_response.status_code == 200
+    assert "heart_disease_api_requests_total" in metrics_response.text
     assert response.status_code == 200
     payload = response.json()
     assert payload["prediction"] in {0, 1}
